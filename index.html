@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <form action="#">
+            <input type="text" placeholder="Фамилия*" required>
+            <input type="text" placeholder="Имя*" required>
+            <input type="email" placeholder="email*" required>
+            <input type="submit">
+        </form>
+    </div>
+    <script>
+        document.addEventListener('click', function (event) {
+            const inputElements = document.querySelectorAll('input');
+            let isClickInsideInput = false;
+
+            inputElements.forEach(elem => {
+                if (elem.contains(event.target)) {
+                    console.log(isClickInsideInput);
+                }
+            });
+
+            if (!isClickInsideInput) {
+                const activeInput = document.activeElement;
+                if (activeInput && activeInput.tagName === 'INPUT') {
+                    activeInput.blur(); // Убираем фокус с активного инпута
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

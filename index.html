@@ -18,6 +18,14 @@
         </form>
     </div>
     <script>
+        let lastActiveInput = null;
+
+        document.addEventListener('focusin', function (event) {
+            if (event.target.tagName === 'INPUT') {
+                lastActiveInput = event.target;
+            }
+        });
+
         document.addEventListener('click', function (event) {
             const inputElements = document.querySelectorAll('input');
             let isClickInsideInput = false;
@@ -28,11 +36,16 @@
                 }
             });
 
-            if (!isClickInsideInput) {
-                const activeInput = document.activeElement;
-                if (activeInput && activeInput.tagName === 'INPUT') {
-                    activeInput.blur(); // Убираем фокус с активного инпута
-                }
+            if (!isClickInsideInput && lastActiveInput) {
+                lastActiveInput.blur(); // Убираем фокус с последнего активного инпута
+                lastActiveInput = null; // Сбрасываем последний активный инпут
+                const res = document.createElement('div');
+                res.classList.add('res');
+                res.textContent = 'клавиатура сейчас должна скрыться';
+                document.querySelector('.container').appendChild(res);
+                setTimeout(() => {
+                    document.querySelector('.container').removeChild(res);
+                }, 2000);
             }
         });
     </script>

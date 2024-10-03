@@ -16,6 +16,11 @@ form {
     gap: 5px;
     width: 50%;
 }
+.res {
+    color: green;
+    text-align: center;
+    padding-top: 10%;
+}
 
 @media (min-width: 320px) and (max-width: 767px) {
     .container {
